@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
@@ -11,10 +10,9 @@ import vercel from '@astrojs/vercel/serverless';
 import icon from 'astro-icon';
 
 
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://adesso-coaching.com',
   integrations: [mdx(), sitemap(), tailwind(), icon()],
-  output: 'server',
+  output: "hybrid",
   adapter: vercel(),
 });
