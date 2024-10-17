@@ -1,0 +1,34 @@
+---
+import { Icon } from "astro-icon/components";
+const { class: className } = Astro.props;
+const items = [
+  { text: "About Me", link: "/about" },
+  { text: "Services", link: "/about" },
+  { text: "Blog", link: "/about" },
+];
+---
+
+<nav class=`flex justify-between w-full py-8 left-0 px-8 ${className} `>
+  <ul class="flex justify-between flex-col gap-4">
+    {
+      items.map((item) => (
+        <li>
+          <a href={item.link} class="font-oxygen md:text-sm">
+            {item.text}
+          </a>
+        </li>
+      ))
+    }
+    <li>
+      <a href="/contact" class="underline font-oxygen md:text-sm"
+      ><div class="flex justify-between items-center gap-2">
+        Book a Call <Icon
+          name="book-a-call"
+          class="text-tertiary fill-none w-6 h-6"
+        />
+      </div></a
+    >
+    </li>
+  </ul>
+ 
+</nav>

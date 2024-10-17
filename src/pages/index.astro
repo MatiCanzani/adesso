@@ -1,50 +1,70 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Layout from "../layouts/Layout.astro";
+import AboutMe from "../components/AboutMe.astro";
+import Services from "../components/Services.astro";
+import Subscribe from "../components/Subscribe.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Layout title="Adesso Coaching">
+  <div class="flex justify-center items-center flex-col h-screen">
+    <h1 class="font-noto font-semibold text-7xl md:text-[10rem] leading-none">
+      Adesso
+    </h1>
+    <h2 class="font-noto md:text-[8rem] text-6xl leading-none">Coaching</h2>
+  </div>
+  <AboutMe />
+  <Services />
+  <div
+    class="md:w-9/12 bg-quaternary flex flex-col justify-center items-center mx-auto p-8 rounded-3xl gap-10 my-10"
+  >
+    <div class="max-w-xl">
+      <h4 class="text-4xl py-4 font-semibold">Get online session.</h4>
+      <div class="space-y-2">
+        <p>
+          Together, we'll embark on a journey of self-discovery, exploring your
+          unique strengths, values, and aspirations.
+        </p>
+        <p>
+          Whether you're seeking greater career satisfaction, improved
+          relationships, or personal growth, I'm here to support you every step
+          of the way.
+        </p>
+      </div>
+    </div>
+
+    <button
+      class="bg-tertiary text-white rounded-lg font-light px-8 py-2 text-sm w-auto"
+    >
+      Book now
+    </button>
+  </div>
+  <Subscribe />
+</Layout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.fromTo(
+    ["h1", "h2"],
+    {
+      opacity: 0,
+      x: 0,
+    },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1.5,
+			delay: 0.5,
+      ease: "power2.out",
+      stagger: 0.8,
+      scrollTrigger: {
+        trigger: "h1",
+        start: "top 80%",
+        end: "bottom 20%",
+      },
+    }
+  );
+</script>
