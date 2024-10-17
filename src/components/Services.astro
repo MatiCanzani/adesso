@@ -42,11 +42,11 @@ const howWorksData = [
 ---
 
 <Container class="w-full">
-  <div class="flex items-start justify-around gap-8 flex-col pt-12">
+  <div class="flex items-start justify-around gap-8 flex-col pt-12 my-8" id="service">
     <h3 class="text-4xl md:text-5xl text-start font-semibold" id="services">
       What is coaching?
     </h3>
-    <div class="flex flex-col gap-2 md:text-lg px-2">
+    <div class="flex flex-col gap-2 md:text-lg px-2" id="services-text">
       <p>
         Coaching is when an individual works with a trained professional in a
         process of self-discovery and self- awareness.
@@ -87,7 +87,10 @@ const howWorksData = [
     >
       {
         howWorksData.map((data) => (
-          <div class="border-b-2 border-primary pb-14 max-w-sm flex flex-col justify-center items-center w-full">
+          <div
+            class="border-b-2 border-primary pb-14 max-w-sm flex flex-col justify-center items-center w-full"
+            id="service-card"
+          >
             <Icon
               name={data.icon}
               height={72}
@@ -127,7 +130,7 @@ const howWorksData = [
   });
 
   gsap.fromTo(
-    "#services",
+    ["#services", "#services-text"],
     {
       opacity: 0,
       x: -100,
@@ -137,6 +140,7 @@ const howWorksData = [
       x: 0,
       duration: 1.5,
       ease: "power2.out",
+      stagger: 0.5,
       scrollTrigger: {
         trigger: "#services",
         start: "top 80%",
@@ -144,7 +148,17 @@ const howWorksData = [
       },
     }
   );
-  gsap.fromTo(
+
+  const howItWorksTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#how-it-work",
+      start: "top 80%",
+      end: "bottom 20%",
+      onEnter: () => howItWorksTl.play(),
+    },
+  });
+
+  howItWorksTl.fromTo(
     "#how-it-work",
     {
       opacity: 0,
@@ -155,11 +169,16 @@ const howWorksData = [
       x: 0,
       duration: 1.5,
       ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#how-it-work",
-        start: "top 80%",
-        end: "bottom 20%",
-      },
     }
   );
+
+  document.querySelectorAll("#service-card").forEach((card) => {
+    howItWorksTl.fromTo(
+      card,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power1.inOut",},
+    );
+  });
+
 </script>
+
