@@ -14,5 +14,5 @@ export default defineConfig({
   site: 'https://adesso-coaching.com',
   integrations: [mdx(), sitemap(), tailwind(), icon()],
   output: "hybrid",
-  adapter: vercel(),
+  adapter: vercel({ imageService: true })
 });
