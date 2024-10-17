@@ -1,6 +1,6 @@
 /* empty css                                */
 import { g as createAstro, c as createComponent, r as renderTemplate, m as maybeRenderHead, b as addAttribute, h as renderSlot, a as renderComponent } from '../chunks/astro/server_DCNCIf8N.mjs';
-import { a as $$Icon, $ as $$Layout } from '../chunks/Layout_DER3NCUb.mjs';
+import { a as $$Icon, $ as $$Layout } from '../chunks/Layout_pzridz43.mjs';
 import { $ as $$Image } from '../chunks/_astro_assets_BOIh38pZ.mjs';
 export { renderers } from '../renderers.mjs';
 
@@ -18,7 +18,7 @@ const Vale = new Proxy({"src":"/_astro/vale.wc-rVYP6.jpeg","width":857,"height":
 								return structuredClone(target);
 							}
 							if (name === 'fsPath') {
-								return "/Users/maticanzani/Documents/Personal/vale/adesso/src/images/vale.jpeg";
+								return "/Users/maticanzani/Documents/Personal/vale/adesso/src/assets/vale.jpeg";
 							}
 							
 							return target[name];

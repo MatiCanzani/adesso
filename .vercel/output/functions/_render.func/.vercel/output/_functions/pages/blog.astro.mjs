@@ -1,7 +1,7 @@
 /* empty css                                */
 import { _ as _page$1 } from '../chunks/post-1_CV5Tr6Ge.mjs';
 import { c as createComponent, r as renderTemplate, a as renderComponent, m as maybeRenderHead, b as addAttribute } from '../chunks/astro/server_DCNCIf8N.mjs';
-import { $ as $$Layout } from '../chunks/Layout_DER3NCUb.mjs';
+import { $ as $$Layout } from '../chunks/Layout_pzridz43.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$Blog = createComponent(($$result, $$props, $$slots) => {
