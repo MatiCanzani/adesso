@@ -27,7 +27,14 @@
 			2048,
 			3840
 		],
-		"domains": [],
-		"remotePatterns": []
+		"domains": [
+			"astro.build"
+		],
+		"remotePatterns": [
+			{
+				"protocol": "https",
+				"hostname": "**.contentful.com"
+			}
+		]
 	}
 }

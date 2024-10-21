@@ -4,10 +4,10 @@ import Container from "../components/Container.astro";
 
 <Container class="w-full bg-quaternary">
   <div
-    class="flex flex-col md:flex-row items-center justify-start mx-auto md:my-12 md:p-12"
+    class="flex flex-col md:flex-row justify-center items-center mx-auto md:my-12 p-4 md:p-12  gap-10 md:gap-20"
   >
     <div
-      class="flex flex-col items-center justify-center text-center w-11/12 md:justify-start gap-4"
+      class="flex flex-col items-center justify-center text-center md:justify-start gap-4"
     >
       <h3 class="text-2xl font-semibold font-kumbh">
         Get notified when I publish new articles
@@ -15,7 +15,7 @@ import Container from "../components/Container.astro";
       <p>Stay up to date with the latest news, announcements, and articles.</p>
     </div>
     <form action="/subscribe" method="post">
-      <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+      <div class="flex flex-row justify-center items-center gap-4">
         <input
           type="email"
           name="email"

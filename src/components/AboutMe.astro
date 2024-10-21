@@ -5,9 +5,9 @@ import Vale from "../assets/vale.jpeg";
 ---
 
 <Container class="w-full bg-quaternary">
-  <div class="flex items-start justify-around gap-8 flex-col pt-12">
+  <div class="flex items-start justify-around gap-8 flex-col pt-12" id="about">
     <div
-      class="flex flex-col md:flex-row justify-center items-center gap-8 md:w-9/12 mx-auto" id="about"
+      class="flex flex-col md:flex-row justify-center items-center gap-8 md:w-9/12 mx-auto"
     >
       <div class="flex flex-col justify-center items-center md:text-lg px-2">
         <h3
@@ -32,7 +32,7 @@ import Vale from "../assets/vale.jpeg";
       <Image
         src={Vale}
         alt="Vale Borzori"
-        class="max-w-md rounded-xl shadow-md w-full"
+        class="max-w-md rounded-xl shadow-md w-full grayscale-[90%]"
         id="Vale"
       />
     </div>
@@ -73,11 +73,11 @@ import Vale from "../assets/vale.jpeg";
     ["#about-me", "#about-text"],
     {
       opacity: 0,
-      x: -100,
+      y: 25,
     },
     {
       opacity: 1,
-      x: 0,
+      y: 0,
       duration: 1.5,
       stagger: 1,
       ease: "power3.out",

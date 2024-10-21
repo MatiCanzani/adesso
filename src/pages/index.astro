@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import AboutMe from "../components/AboutMe.astro";
 import Services from "../components/Services.astro";
 import Subscribe from "../components/Subscribe.astro";
+import Book from "../components/Book.astro";
 ---
 
 <Layout title="Adesso Coaching">
@@ -14,30 +15,7 @@ import Subscribe from "../components/Subscribe.astro";
   </div>
   <AboutMe />
   <Services />
-  <div
-    class="md:w-9/12 bg-quaternary flex flex-col justify-center items-center mx-auto p-8 rounded-3xl gap-10 my-10"
-  >
-    <div class="max-w-xl">
-      <h4 class="text-4xl py-4 font-semibold">Get online session.</h4>
-      <div class="space-y-2">
-        <p>
-          Together, we'll embark on a journey of self-discovery, exploring your
-          unique strengths, values, and aspirations.
-        </p>
-        <p>
-          Whether you're seeking greater career satisfaction, improved
-          relationships, or personal growth, I'm here to support you every step
-          of the way.
-        </p>
-      </div>
-    </div>
-
-    <button
-      class="bg-tertiary text-white rounded-lg font-light px-8 py-2 text-sm w-auto"
-    >
-      Book now
-    </button>
-  </div>
+  <Book />
   <Subscribe />
 </Layout>
 
@@ -51,11 +29,9 @@ import Subscribe from "../components/Subscribe.astro";
     ["h1", "h2"],
     {
       opacity: 0,
-      x: 0,
     },
     {
       opacity: 1,
-      x: 0,
       duration: 1.5,
 			delay: 0.5,
       ease: "power2.out",

@@ -17,5 +17,12 @@ export default defineConfig({
   site: 'https://adesso-coaching.com',
   integrations: [mdx(), sitemap(), tailwind(), icon(), react()],
   output: "hybrid",
-  adapter: vercel({ imageService: true })
+  adapter: vercel({ imageService: true }),
+  image: {
+    domains: ["astro.build"],
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: '**.contentful.com',
+    }],
+  }
 });

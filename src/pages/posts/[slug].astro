@@ -1,0 +1,46 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/Container.astro";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+
+import { contentfulClient } from "../../lib/contentful";
+import type { BlogPost } from "../../lib/contentful";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const entries = await contentfulClient.getEntries<BlogPost>({
+    content_type: "blogPost",
+  });
+
+  const pages = entries.items.map((item) => {
+
+    const imageUrl = item.fields.image.fields.file.url;
+    const imageHeight = item.fields.image.fields.file.details.image?.height;
+    const imageWidth = item.fields.image.fields.file.details.image?.width;
+    
+    return {
+      params: { slug: item.fields.slug },
+      props: {
+        title: item.fields.title,
+        image: imageUrl,
+        width: imageWidth,
+        height: imageHeight,
+        content: documentToHtmlString(item.fields.content),
+        date: new Date(item.fields.date).toLocaleDateString(),
+      },
+    };
+  });
+  return pages;
+}
+
+const { content, title, date, image, width, height } = Astro.props;
+---
+
+<Layout title={title}>
+  <Container>
+    <h1>{title}</h1>
+    <time>{date}</time>
+    {image && <Image src={image} alt={title} width={width} height={height} class="max-w-screen-md">}
+    <article set:html={content} />
+  </Container>
+</Layout>

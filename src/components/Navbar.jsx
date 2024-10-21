@@ -1,7 +1,7 @@
 import { useState } from "react";
 import gsap from "gsap";
 
-const Navbar = ({ className }) => {
+const Navbar = () => {
   const items = [
     { text: "About Me", link: "#about" },
     { text: "Services", link: "#service" },
@@ -46,22 +46,19 @@ const Navbar = ({ className }) => {
       ease: "power4.inOut",
     });
 
-    // Smooth scroll to section
     const targetElement = document.querySelector(link);
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
     }
     
-    // Reset menu icon animation
     animateMenuIcon();
   };
 
   return (
     <>
-      <nav className={`flex justify-between w-full py-8 absolute left-0 px-8 gap-4 ${className}`}>
-        <p className="md:text-lg">Adesso</p>
+      <nav className={`flex justify-between w-full absolute left-0 px-8 gap-4`}>
+        <p className="md:text-lg">Adesso</p>  
         <button className="md:hidden" onClick={toggleMenu}>
-          {/* Icono de menú con líneas */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -80,7 +77,7 @@ const Navbar = ({ className }) => {
               <a
                 href={item.link}
                 className="font-oxygen md:text-lg"
-                onClick={() => handleLinkClick(item.link)} // Add click handler
+                onClick={() => handleLinkClick(item.link)} 
               >
                 {item.text}
               </a>
@@ -90,24 +87,18 @@ const Navbar = ({ className }) => {
             <a
               href="/contact"
               className="underline font-oxygen md:text-lg"
-              onClick={() => handleLinkClick("/contact")} // Add click handler
+              onClick={() => handleLinkClick("/contact")}
             >
               <div className="flex justify-between items-center gap-2">
                 Book a Call
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
                   className="w-6 h-6 text-tertiary"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 12H8m0 0v4m0-4v-4m0 4h8"
-                  />
-                </svg>
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M17 7l-10 10" />
+                    <path d="M8 7l9 0l0 9" />
+                  </svg>
               </div>
             </a>
           </li>

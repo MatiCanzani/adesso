@@ -1,5 +1,5 @@
 import { f as baseService } from './astro/assets-service_YmhS_AHm.mjs';
-import './_astro_assets_ME-AdmP3.mjs';
+import './_astro_assets_DI0DaapL.mjs';
 
 function isESMImportedImage(src) {
     return typeof src === 'object';
