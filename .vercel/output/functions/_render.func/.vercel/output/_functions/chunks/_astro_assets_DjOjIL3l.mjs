@@ -839,7 +839,7 @@ async function getConfiguredImageService() {
   if (!globalThis?.astroAsset?.imageService) {
     const { default: service } = await import(
       // @ts-expect-error
-      './build-service_DPjBppcG.mjs'
+      './build-service_CFZh05tJ.mjs'
     ).catch((e) => {
       const error = new AstroError(InvalidImageService);
       error.cause = e;
@@ -1450,7 +1450,7 @@ const $$Picture = createComponent(async ($$result, $$props, $$slots) => {
   })} <img${addAttribute(fallbackImage.src, "src")}${spreadAttributes(imgAdditionalAttributes)}${spreadAttributes(fallbackImage.attributes)}> </picture>`;
 }, "/Users/maticanzani/Documents/Personal/vale/adesso/node_modules/.pnpm/astro@4.16.6_rollup@4.24.0_typescript@5.6.3/node_modules/astro/components/Picture.astro", void 0);
 
-const imageConfig = {"service":{"entrypoint":"@astrojs/vercel/build-image-service","config":{"sizes":[640,750,828,1080,1200,1920,2048,3840],"domains":["astro.build"],"remotePatterns":[{"protocol":"https","hostname":"**.contentful.com"}]}},"domains":["astro.build"],"remotePatterns":[{"protocol":"https","hostname":"**.contentful.com"}]};
+const imageConfig = {"service":{"entrypoint":"@astrojs/vercel/build-image-service","config":{"sizes":[640,750,828,1080,1200,1920,2048,3840],"domains":["astro.build","images.ctfassets.net"],"remotePatterns":[{"protocol":"https","hostname":"**.contentful.com"}]}},"domains":["astro.build","images.ctfassets.net"],"remotePatterns":[{"protocol":"https","hostname":"**.contentful.com"}]};
 					const getImage = async (options) => await getImage$1(options, imageConfig);
 
 export { $$Image as $, getConfiguredImageService as g, imageConfig as i, lookup as l };

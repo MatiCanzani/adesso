@@ -13,11 +13,11 @@ export async function getStaticPaths() {
   });
 
   const pages = entries.items.map((item) => {
-
-    const imageUrl = item.fields.image.fields.file.url;
+    console.log('item.image', item.fields.image.fields)
+    const imageUrl = `https:${item.fields.image.fields.file.url}`;
     const imageHeight = item.fields.image.fields.file.details.image?.height;
     const imageWidth = item.fields.image.fields.file.details.image?.width;
-    
+
     return {
       params: { slug: item.fields.slug },
       props: {
@@ -34,13 +34,21 @@ export async function getStaticPaths() {
 }
 
 const { content, title, date, image, width, height } = Astro.props;
+console.log('image', image)
 ---
 
 <Layout title={title}>
   <Container>
     <h1>{title}</h1>
     <time>{date}</time>
-    {image && <Image src={image} alt={title} width={width} height={height} class="max-w-screen-md">}
-    <article set:html={content} />
-  </Container>
-</Layout>
+    <Image
+      src={image}
+      alt={title}
+      width={width}
+      height={height}
+      class="max-w-screen-md"
+    >
+      <article set:html={content} />
+    </Image>
+  </Container></Layout
+>

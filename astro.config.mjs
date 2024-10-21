@@ -19,7 +19,7 @@ export default defineConfig({
   output: "hybrid",
   adapter: vercel({ imageService: true }),
   image: {
-    domains: ["astro.build"],
+    domains: ["astro.build", 'images.ctfassets.net'],
     remotePatterns: [{
       protocol: 'https',
       hostname: '**.contentful.com',

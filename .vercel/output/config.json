@@ -28,7 +28,8 @@
 			3840
 		],
 		"domains": [
-			"astro.build"
+			"astro.build",
+			"images.ctfassets.net"
 		],
 		"remotePatterns": [
 			{
