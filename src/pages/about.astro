@@ -1,17 +1,18 @@
 ---
 import { Image } from "astro:assets";
-import Container from "../components/Container.astro";
 import Vale from "../assets/vale.jpeg";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
 ---
 
-<Container class="w-full bg-quaternary">
-  <div class="flex items-start justify-around gap-8 flex-col pt-12" id="about">
+<Layout title="About Me">
+  <Hero id="about">
     <div
       class="flex flex-col md:flex-row justify-center items-center gap-8 md:w-9/12 mx-auto"
     >
       <div class="flex flex-col justify-center items-center md:text-lg px-2">
         <h3
-          class="text-5xl md:text-6xl text-start font-semibold mt-8 mb-16 w-full"
+          class="text-5xl md:text-6xl text-start font-semibold py-8 w-full"
           id="about-me"
           transition:name="About Me"
         >
@@ -37,7 +38,7 @@ import Vale from "../assets/vale.jpeg";
         id="Vale"
       />
     </div>
-  </div>
+  </Hero>
   <div
     class="flex flex-col justify-center items-center gap-10 bg-secondary border-none rounded-xl px-8 py-10 w-full lg:w-8/12 mx-auto text-center my-20 shadow-md"
   >
@@ -63,50 +64,50 @@ import Vale from "../assets/vale.jpeg";
       that await you.
     </spam>
   </div>
-</Container>
+</Layout>
+
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  document.addEventListener("astro:after-swap", () => {
-    gsap.registerPlugin(ScrollTrigger);
 
-    gsap.fromTo(
-      ["#about-me", "#about-text"],
-      {
-        opacity: 0,
-        y: 25,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        stagger: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "#about-me",
-          start: "top 80%",
-          end: "bottom 20%",
-        },
-      }
-    );
+  gsap.registerPlugin(ScrollTrigger);
 
-    gsap.fromTo(
-      "#Vale",
-      {
-        opacity: 0,
+  gsap.fromTo(
+    ["#about-me", "#about-text"],
+    {
+      opacity: 0,
+      y: 25,
+    },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      stagger: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: "#about-me",
+        start: "top 80%",
+        end: "bottom 20%",
       },
-      {
-        opacity: 1,
-        duration: 1.5,
-        ease: "power3.out",
-        delay: 0.5,
-        scrollTrigger: {
-          trigger: "#about-me",
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-  });
+    }
+  );
+
+  gsap.fromTo(
+    "#Vale",
+    {
+      opacity: 0,
+    },
+    {
+      opacity: 1,
+      duration: 1.5,
+      ease: "power3.out",
+      delay: 0.5,
+      scrollTrigger: {
+        trigger: "#about-me",
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none none",
+      },
+    }
+  );
 </script>

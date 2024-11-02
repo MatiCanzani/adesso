@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8">
+  <line class="menu-line-top" x1="4" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="2"></line>
+  <line class="menu-line-middle" x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2"></line>
+  <line class="menu-line-bottom" x1="4" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="2"></line>
+</svg>

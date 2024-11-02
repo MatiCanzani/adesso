@@ -1,0 +1,135 @@
+---
+import NavButton from "./NavButton.astro";
+import { Icon } from "astro-icon/components";
+
+const items = [
+  { text: "About Me", link: "/about" },
+  { text: "Services", link: "/services" },
+  { text: "Blog", link: "/blog" },
+];
+---
+
+<nav class="fixed flex justify-between w-full left-0 top-0 py-4 px-12 gap-4 bg-white max-w-screen-2xl z-50">
+  <NavButton className="md:text-lg" link="/">Adesso</NavButton>
+  <button class="md:hidden menu-button">
+    <Icon name="hamburguer" class='relative z-50 text-tertiary w-6 h-6'/>
+  </button>
+  <ul class="hidden md:inline-flex justify-between gap-4">
+    {
+      items.map((item) => (
+        <li>
+          <NavButton link={item.link}>{item.text}</NavButton>
+        </li>
+      ))
+    }
+    <li>
+      <NavButton link="/book" className="font-oxygen">
+        <div class="flex justify-between items-center gap-2">
+          Book a Call
+          <Icon
+            name="book-a-call"
+            height={24}
+            width={24}
+            class="text-tertiary"
+            id="book-a-call"
+          />
+        </div>
+      </NavButton>
+    </li>
+  </ul>
+</nav>
+<div
+  class="mobile-menu fixed top-0 right-0 w-full h-full z-40 bg-gray-900 transform translate-x-full md:hidden"
+>
+  <ul class="flex flex-col items-center justify-center gap-8 h-full">
+    {
+      items.map((item) => (
+        <li>
+          <NavButton
+            link={item.link}
+            className="text-white text-2xl font-light"
+            transition:name={item.text}
+          >
+            {item.text}
+          </NavButton>
+        </li>
+      ))
+    }
+    <li>
+      <NavButton
+        link="/book"
+        className="text-white text-2xl font-light inline-flex gap-2"
+      >
+        Book a Call
+        <Icon
+          name="book-a-call"
+          height={32}
+          width={32}
+          class="text-tertiary"
+          id="book-a-call"
+        />
+      </NavButton>
+    </li>
+  </ul>
+</div>
+
+<script>
+  import gsap from "gsap";
+  document.addEventListener("astro:page-load", () => {
+    const menuButton = document.querySelector(".menu-button");
+    const closeMenuButton = document.querySelector(".close-menu-button");
+    const mobileMenu = document.querySelector(".mobile-menu");
+    let isOpen = false;
+
+    function toggleMenu() {
+      isOpen = !isOpen;
+      const menuAnimation = isOpen ? "0" : "100%";
+
+      gsap.to(mobileMenu, {
+        x: menuAnimation,
+        duration: 0.5,
+        ease: "power4.inOut",
+      });
+      animateMenuIcon();
+    }
+
+    function animateMenuIcon() {
+      const topLine = ".menu-line-top";
+      const middleLine = ".menu-line-middle";
+      const bottomLine = ".menu-line-bottom";
+
+      if (isOpen) {
+        gsap.to(topLine, {
+          rotation: 45,
+          y: 6,
+          duration: 0.35,
+          transformOrigin: "50% 50%",
+        });
+        gsap.to(middleLine, { opacity: 0, duration: 0.35 });
+        gsap.to(bottomLine, {
+          rotation: -45,
+          y: -6,
+          duration: 0.35,
+          transformOrigin: "50% 50%",
+        });
+      } else {
+        gsap.to(topLine, {
+          rotation: 0,
+          y: 0,
+          duration: 0.35,
+          transformOrigin: "50% 50%",
+        });
+        gsap.to(middleLine, { opacity: 1, duration: 0.35 });
+        gsap.to(bottomLine, {
+          rotation: 0,
+          y: 0,
+          duration: 0.35,
+          transformOrigin: "50% 50%",
+        });
+      }
+    }
+
+    menuButton?.addEventListener("click", toggleMenu);
+    closeMenuButton?.addEventListener("click", toggleMenu);
+  });
+</script>
