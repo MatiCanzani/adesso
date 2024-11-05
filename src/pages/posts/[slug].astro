@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Container from "../../components/Container.astro";
+import Section from "../../components/Section.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 import { contentfulClient } from "../../lib/contentful";
@@ -13,7 +13,6 @@ export async function getStaticPaths() {
   });
 
   const pages = entries.items.map((item) => {
-    console.log('item.image', item.fields.image.fields)
     const imageUrl = `https:${item.fields.image.fields.file.url}`;
     const imageHeight = item.fields.image.fields.file.details.image?.height;
     const imageWidth = item.fields.image.fields.file.details.image?.width;
@@ -34,21 +33,20 @@ export async function getStaticPaths() {
 }
 
 const { content, title, date, image, width, height } = Astro.props;
-console.log('image', image)
+console.log("title", title);
 ---
 
 <Layout title={title}>
-  <Container>
-    <h1>{title}</h1>
+  <Section>
+    <title>{title}</title>
     <time>{date}</time>
     <Image
       src={image}
       alt={title}
       width={width}
       height={height}
-      class="max-w-screen-md"
-    >
-      <article set:html={content} />
-    </Image>
-  </Container></Layout
->
+      class="max-w-md"
+    />
+    <article set:html={content} />
+  </Section>
+</Layout>

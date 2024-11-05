@@ -3,21 +3,22 @@ import { Image } from "astro:assets";
 import Vale from "../assets/vale.jpeg";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
 ---
 
 <Layout title="About Me">
   <Hero id="about">
     <div
-      class="flex flex-col md:flex-row justify-center items-center gap-8 md:w-9/12 mx-auto"
+      class="h-full flex flex-col justify-center items-center mx-auto gap-8 md:flex-row w-11/12 md:w-9/12"
     >
       <div class="flex flex-col justify-center items-center md:text-lg px-2">
-        <h3
+        <h1
           class="text-5xl md:text-6xl text-start font-semibold py-8 w-full"
           id="about-me"
           transition:name="About Me"
         >
           About Me
-        </h3>
+        </h1>
         <div class="flex flex-col gap-4" id="about-text">
           <p>
             As a certified mindfulness coach aligned and trained with the ICF
@@ -39,31 +40,33 @@ import Hero from "../components/Hero.astro";
       />
     </div>
   </Hero>
-  <div
-    class="flex flex-col justify-center items-center gap-10 bg-secondary border-none rounded-xl px-8 py-10 w-full lg:w-8/12 mx-auto text-center my-20 shadow-md"
-  >
-    <h4 class="text-2xl md:text-4xl font-extrabold text-center">
-      Discover Your Path to Unbound Potential
-    </h4>
-    <div class="space-y-0">
-      <p class="md:text-lg text-pretty">
-        Are you feeling stuck, unsure of your direction, or limited by negative
-        thoughts?
-      </p>
-      <p class="md:text-lg text-pretty">
-        As a dedicated life coach, I specialize in guiding individuals to unlock
-        their full potential through mindset transformation, mindfulness
-        techniques, and a positive focus.
-      </p>
+  <Section>
+    <div
+      class="flex flex-col justify-center items-center gap-10 bg-secondary border-none rounded-xl px-8 py-10 w-full lg:w-8/12 mx-auto text-center my-20 shadow-md"
+    >
+      <h4 class="text-2xl md:text-4xl font-extrabold text-center">
+        Discover Your Path to Unbound Potential
+      </h4>
+      <div class="space-y-0">
+        <p class="md:text-lg text-pretty">
+          Are you feeling stuck, unsure of your direction, or limited by
+          negative thoughts?
+        </p>
+        <p class="md:text-lg text-pretty">
+          As a dedicated life coach, I specialize in guiding individuals to
+          unlock their full potential through mindset transformation,
+          mindfulness techniques, and a positive focus.
+        </p>
+      </div>
     </div>
-  </div>
 
-  <div class="flex justify-center mx-auto w-full py-14">
-    <spam class="text-xl italic font-semibold font-kumbh leading-snug">
-      Let's break free from limitations and discover the boundless possibilities
-      that await you.
-    </spam>
-  </div>
+    <div class="flex justify-center mx-auto w-full py-14">
+      <spam class="text-xl italic font-semibold font-kumbh leading-snug">
+        Let's break free from limitations and discover the boundless
+        possibilities that await you.
+      </spam>
+    </div>
+  </Section>
 </Layout>
 
 <script>

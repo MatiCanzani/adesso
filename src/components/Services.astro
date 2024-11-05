@@ -1,5 +1,5 @@
 ---
-import Container from "../components/Container.astro";
+import Section from "../components/Section.astro";
 import Layout from "../layouts/Layout.astro";
 import Card from "./Card.astro";
 import { Icon } from "astro-icon/components";
@@ -43,7 +43,7 @@ const howWorksData = [
 ---
 
 <Layout title="Services">
-  <Container class="w-full">
+  <Section class="w-full">
     <div
       class="flex items-start justify-around gap-8 flex-col pt-12 my-8"
       id="service"
@@ -88,8 +88,8 @@ const howWorksData = [
         </div>
       </div>
     </div>
-  </Container>
-  <Container class="w-full bg-quaternary">
+  </Section>
+  <Section class="w-full bg-quaternary">
     <div class="flex items-start justify-center mx-auto gap-8 flex-col py-12">
       <h3 class="text-4xl md:text-5xl font-semibold" id="how-it-work">
         How it works
@@ -116,7 +116,7 @@ const howWorksData = [
         }
       </div>
     </div>
-  </Container>
+  </Section>
 </Layout>
 
 <script>

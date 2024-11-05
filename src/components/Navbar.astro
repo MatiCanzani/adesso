@@ -9,7 +9,7 @@ const items = [
 ];
 ---
 
-<nav class="fixed flex justify-between w-full left-0 top-0 py-4 px-12 gap-4 bg-white max-w-screen-2xl z-50">
+<nav class="fixed flex justify-between w-full left-0 top-0 py-4 px-4 md:px-12 gap-4 bg-white max-w-screen-2xl z-50">
   <NavButton className="md:text-lg" link="/">Adesso</NavButton>
   <button class="md:hidden menu-button">
     <Icon name="hamburguer" class='relative z-50 text-tertiary w-6 h-6'/>
@@ -60,6 +60,8 @@ const items = [
         link="/book"
         className="text-white text-2xl font-light inline-flex gap-2"
       >
+      <div class="flex justify-between items-center gap-2">
+
         Book a Call
         <Icon
           name="book-a-call"
@@ -68,6 +70,7 @@ const items = [
           class="text-tertiary"
           id="book-a-call"
         />
+        </div>
       </NavButton>
     </li>
   </ul>

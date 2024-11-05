@@ -1,8 +1,9 @@
 ---
-import Container from "../components/Container.astro";
+import Section from "../components/Section.astro";
 import Card from "../components/Card.astro";
 import Layout from "../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
+import Hero from "../components/Hero.astro";
 
 const cardsData = [
   {
@@ -41,10 +42,13 @@ const howWorksData = [
   },
 ];
 ---
-<Layout title="What is coaching">
 
-  <Container class="w-full">
-    <div class="flex items-start justify-around gap-8 flex-col pt-12 my-8" id="service">
+<Layout title="What is coaching">
+  <Hero>
+    <div
+      class="flex flex-col justify-start items-center mx-auto mt-[30px] gap-8 w-11/12 md:w-9/12"
+      id="service"
+    >
       <h3 class="text-4xl md:text-5xl text-start font-semibold" id="services">
         What is coaching?
       </h3>
@@ -61,52 +65,59 @@ const howWorksData = [
         </p>
       </div>
     </div>
+  </Hero>
+  <Section class="w-full">
     <div
-    class="flex justify-around items-center gap-8 flex-col px-0 md:p-4 mx-auto w-full mt-12"
-    id="coaching"
+      class="flex justify-around items-center gap-8 flex-col px-0 md:p-4 mx-auto w-full mt-12"
+      id="coaching"
     >
-    <div
-    class="flex justify-around items-start md:items-center flex-col md:p-4 mx-auto w-full mt-12"
-    >
-    <h3 class="text-3xl md:text-[2.7rem] font-semibold mb-12" id="why-a-coach">
-      Why work with a Coach
-    </h3>
-    <div
-    class="flex justify-center items-center gap-8 flex-col md:flex-row md:w-9/12 flex-wrap p-4 xl:w-full xl:flex-nowrap mx-auto"
-    >
-    {cardsData.map((card) => <Card title={card.title} body={card.body} />)}
-  </div>
-</div>
-</div>
-</Container>
-<Container class="w-full bg-quaternary">
-  <div class="flex items-start justify-center mx-auto gap-8 flex-col py-12">
-    <h3 class="text-4xl md:text-5xl font-semibold" id="how-it-work">
-      How it works
-    </h3>
-    <div
-    class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap md:flex-row justify-around px-2 md:text-lg py-12 w-full text-center"
-    >
-    {
-      howWorksData.map((data) => (
-        <div
-        class="border-b-2 border-primary pb-14 max-w-sm flex flex-col justify-center items-center w-full"
-        id="service-card"
+      <div
+        class="flex justify-around items-start md:items-center flex-col md:p-4 mx-auto w-full mt-12"
+      >
+        <h3
+          class="text-3xl md:text-[2.7rem] font-semibold mb-12"
+          id="why-a-coach"
         >
-            <Icon
-              name={data.icon}
-              height={72}
-              width={72}
-              class="m-8 text-tertiary"
-              id={data.icon}
-              />
-            <p>{data.body}</p>
-          </div>
-        ))
-      }
+          Why work with a Coach
+        </h3>
+        <div
+          class="flex justify-center items-center gap-8 flex-col md:flex-row md:w-9/12 flex-wrap p-4 xl:w-full xl:flex-nowrap mx-auto"
+        >
+          {
+            cardsData.map((card) => (
+              <Card title={card.title} body={card.body} />
+            ))
+          }
+        </div>
+      </div>
     </div>
-  </div>
-</Container>
+    <div class="flex items-start justify-center mx-auto gap-8 flex-col py-12">
+      <h3 class="text-4xl md:text-5xl font-semibold" id="how-it-work">
+        How it works
+      </h3>
+      <div
+        class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-12 md:flex-row justify-around px-2 md:text-lg py-12 w-full text-center"
+      >
+        {
+          howWorksData.map((data) => (
+            <div
+              class="border-b-2 border-primary pb-14 max-w-sm flex flex-col justify-center items-center w-full"
+              id="service-card"
+            >
+              <Icon
+                name={data.icon}
+                height={72}
+                width={72}
+                class="m-8 text-tertiary"
+                id={data.icon}
+              />
+              <p>{data.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
 </Layout>
 
 <script>
@@ -198,9 +209,7 @@ const howWorksData = [
     howItWorksTl.fromTo(
       card,
       { opacity: 0, y: 25 },
-      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out",},
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
     );
   });
-
 </script>
-

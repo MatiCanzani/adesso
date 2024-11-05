@@ -1,36 +1,50 @@
 ---
-import Container from "../components/Container.astro";
+import Section from "../components/Section.astro";
+import BlogCard from "../components/BlogCard.astro";
 import Layout from "../layouts/Layout.astro";
 import { contentfulClient } from "../lib/contentful";
 import type { BlogPost } from "../lib/contentful";
+import BlogsGrid from "../components/BlogsGrid.astro";
 
 const entries = await contentfulClient.getEntries<BlogPost>({
   content_type: "blogPost",
 });
 
 const posts = entries.items.map((item) => {
-  const { title, date, description, slug } = item.fields;
+  const { title, date, description, slug, image } = item.fields;
+  const imageUrl = `https:${item.fields.image.fields.file.url}`;
+  console.log('imageUrl', imageUrl)
   return {
     title,
     slug,
     description,
-    date: new Date(date).toLocaleDateString()
+    date: new Date(date).toLocaleDateString(),
+    imageUrl,
   };
 });
-
 ---
 
 <Layout title="My Articles">
-  <Container class="h-screen mt-16">
-    <h1>My Articles</h1>
-    <ul class="text-slate-900">
+  <Section class="h-screen mt-16">
+    <h1
+      class="text-5xl md:text-6xl text-start font-semibold py-8 w-full"
+      id="about-me"
+      transition:name="About Me"
+    >
+      My Articles
+    </h1>
+    <BlogsGrid>
       {
         posts.map((post) => (
-          <li>
-            <a href={`/posts/${post.slug}`}>{post.title}</a>
-          </li>
+          <BlogCard
+            title={post.title}
+            date={post.date}
+            description={post.description}
+            link={`/posts/${post.slug}`}
+            imageSrc={post.imageUrl}
+          />
         ))
       }
-    </ul>
-  </Container>
+    </BlogsGrid>
+  </Section>
 </Layout>
