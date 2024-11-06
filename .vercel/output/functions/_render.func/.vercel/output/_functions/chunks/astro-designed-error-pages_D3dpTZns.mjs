@@ -1,4 +1,4 @@
-import { h as escape, D as DEFAULT_404_COMPONENT } from './astro/server_CMMz5hBL.mjs';
+import { j as escape, D as DEFAULT_404_COMPONENT } from './astro/server_DKnCVUSr.mjs';
 
 const NOOP_MIDDLEWARE_FN = (_, next) => next();
 

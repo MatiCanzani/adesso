@@ -2309,8 +2309,350 @@ async function renderPage(result, componentFactory, props, children, streaming, 
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_".split("").reduce((v, c) => (v[c.charCodeAt(0)] = c, v), []);
-"-0123456789_".split("").reduce((v, c) => (v[c.charCodeAt(0)] = c, v), []);
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
+/*! https://mths.be/cssesc v3.0.0 by @mathias */
+
+var object = {};
+var hasOwnProperty = object.hasOwnProperty;
+var merge = function merge(options, defaults) {
+	if (!options) {
+		return defaults;
+	}
+	var result = {};
+	for (var key in defaults) {
+		// `if (defaults.hasOwnProperty(key) { … }` is not needed here, since
+		// only recognized option names are used.
+		result[key] = hasOwnProperty.call(options, key) ? options[key] : defaults[key];
+	}
+	return result;
+};
+
+var regexAnySingleEscape = /[ -,\.\/:-@\[-\^`\{-~]/;
+var regexSingleEscape = /[ -,\.\/:-@\[\]\^`\{-~]/;
+var regexExcessiveSpaces = /(^|\\+)?(\\[A-F0-9]{1,6})\x20(?![a-fA-F0-9\x20])/g;
+
+// https://mathiasbynens.be/notes/css-escapes#css
+var cssesc = function cssesc(string, options) {
+	options = merge(options, cssesc.options);
+	if (options.quotes != 'single' && options.quotes != 'double') {
+		options.quotes = 'single';
+	}
+	var quote = options.quotes == 'double' ? '"' : '\'';
+	var isIdentifier = options.isIdentifier;
+
+	var firstChar = string.charAt(0);
+	var output = '';
+	var counter = 0;
+	var length = string.length;
+	while (counter < length) {
+		var character = string.charAt(counter++);
+		var codePoint = character.charCodeAt();
+		var value = void 0;
+		// If it’s not a printable ASCII character…
+		if (codePoint < 0x20 || codePoint > 0x7E) {
+			if (codePoint >= 0xD800 && codePoint <= 0xDBFF && counter < length) {
+				// It’s a high surrogate, and there is a next character.
+				var extra = string.charCodeAt(counter++);
+				if ((extra & 0xFC00) == 0xDC00) {
+					// next character is low surrogate
+					codePoint = ((codePoint & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000;
+				} else {
+					// It’s an unmatched surrogate; only append this code unit, in case
+					// the next code unit is the high surrogate of a surrogate pair.
+					counter--;
+				}
+			}
+			value = '\\' + codePoint.toString(16).toUpperCase() + ' ';
+		} else {
+			if (options.escapeEverything) {
+				if (regexAnySingleEscape.test(character)) {
+					value = '\\' + character;
+				} else {
+					value = '\\' + codePoint.toString(16).toUpperCase() + ' ';
+				}
+			} else if (/[\t\n\f\r\x0B]/.test(character)) {
+				value = '\\' + codePoint.toString(16).toUpperCase() + ' ';
+			} else if (character == '\\' || !isIdentifier && (character == '"' && quote == character || character == '\'' && quote == character) || isIdentifier && regexSingleEscape.test(character)) {
+				value = '\\' + character;
+			} else {
+				value = character;
+			}
+		}
+		output += value;
+	}
+
+	if (isIdentifier) {
+		if (/^-[-\d]/.test(output)) {
+			output = '\\-' + output.slice(1);
+		} else if (/\d/.test(firstChar)) {
+			output = '\\3' + firstChar + ' ' + output.slice(1);
+		}
+	}
+
+	// Remove spaces after `\HEX` escapes that are not followed by a hex digit,
+	// since they’re redundant. Note that this is only possible if the escape
+	// sequence isn’t preceded by an odd number of backslashes.
+	output = output.replace(regexExcessiveSpaces, function ($0, $1, $2) {
+		if ($1 && $1.length % 2) {
+			// It’s not safe to remove the space, so don’t.
+			return $0;
+		}
+		// Strip the space.
+		return ($1 || '') + $2;
+	});
+
+	if (!isIdentifier && options.wrap) {
+		return quote + output + quote;
+	}
+	return output;
+};
+
+// Expose default options (so they can be overridden globally).
+cssesc.options = {
+	'escapeEverything': false,
+	'isIdentifier': false,
+	'quotes': 'single',
+	'wrap': false
+};
+
+cssesc.version = '3.0.0';
+
+var cssesc_1 = cssesc;
+
+const cssesc$1 = /*@__PURE__*/getDefaultExportFromCjs(cssesc_1);
+
+const EASE_IN_OUT_QUART = "cubic-bezier(0.76, 0, 0.24, 1)";
+function slide({
+  duration
+} = {}) {
+  return {
+    forwards: {
+      old: [
+        {
+          name: "astroFadeOut",
+          duration: duration ?? "90ms",
+          easing: EASE_IN_OUT_QUART,
+          fillMode: "both"
+        },
+        {
+          name: "astroSlideToLeft",
+          duration: duration ?? "220ms",
+          easing: EASE_IN_OUT_QUART,
+          fillMode: "both"
+        }
+      ],
+      new: [
+        {
+          name: "astroFadeIn",
+          duration: duration ?? "210ms",
+          easing: EASE_IN_OUT_QUART,
+          delay: duration ? void 0 : "30ms",
+          fillMode: "both"
+        },
+        {
+          name: "astroSlideFromRight",
+          duration: duration ?? "220ms",
+          easing: EASE_IN_OUT_QUART,
+          fillMode: "both"
+        }
+      ]
+    },
+    backwards: {
+      old: [{ name: "astroFadeOut" }, { name: "astroSlideToRight" }],
+      new: [{ name: "astroFadeIn" }, { name: "astroSlideFromLeft" }]
+    }
+  };
+}
+function fade({
+  duration
+} = {}) {
+  const anim = {
+    old: {
+      name: "astroFadeOut",
+      duration: duration ?? 180,
+      easing: EASE_IN_OUT_QUART,
+      fillMode: "both"
+    },
+    new: {
+      name: "astroFadeIn",
+      duration: duration ?? 180,
+      easing: EASE_IN_OUT_QUART,
+      fillMode: "both"
+    }
+  };
+  return {
+    forwards: anim,
+    backwards: anim
+  };
+}
+
+const transitionNameMap = /* @__PURE__ */ new WeakMap();
+function incrementTransitionNumber(result) {
+  let num = 1;
+  if (transitionNameMap.has(result)) {
+    num = transitionNameMap.get(result) + 1;
+  }
+  transitionNameMap.set(result, num);
+  return num;
+}
+function createTransitionScope(result, hash) {
+  const num = incrementTransitionNumber(result);
+  return `astro-${hash}-${num}`;
+}
+const getAnimations = (name) => {
+  if (name === "fade") return fade();
+  if (name === "slide") return slide();
+  if (typeof name === "object") return name;
+};
+const addPairs = (animations, stylesheet) => {
+  for (const [direction, images] of Object.entries(animations)) {
+    for (const [image, rules] of Object.entries(images)) {
+      stylesheet.addAnimationPair(direction, image, rules);
+    }
+  }
+};
+const reEncodeValidChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_".split("").reduce((v, c) => (v[c.charCodeAt(0)] = c, v), []);
+const reEncodeInValidStart = "-0123456789_".split("").reduce((v, c) => (v[c.charCodeAt(0)] = c, v), []);
+function reEncode(s) {
+  let result = "";
+  let codepoint;
+  for (let i = 0; i < s.length; i += (codepoint ?? 0) > 65535 ? 2 : 1) {
+    codepoint = s.codePointAt(i);
+    if (codepoint !== void 0) {
+      result += codepoint < 128 ? codepoint === 95 ? "__" : reEncodeValidChars[codepoint] ?? "_" + codepoint.toString(16).padStart(2, "0") : String.fromCodePoint(codepoint);
+    }
+  }
+  return reEncodeInValidStart[result.codePointAt(0) ?? 0] ? "_" + result : result;
+}
+function renderTransition(result, hash, animationName, transitionName) {
+  if (typeof (transitionName ?? "") !== "string") {
+    throw new Error(`Invalid transition name {${transitionName}}`);
+  }
+  if (!animationName) animationName = "fade";
+  const scope = createTransitionScope(result, hash);
+  const name = transitionName ? cssesc$1(reEncode(transitionName), { isIdentifier: true }) : scope;
+  const sheet = new ViewTransitionStyleSheet(scope, name);
+  const animations = getAnimations(animationName);
+  if (animations) {
+    addPairs(animations, sheet);
+  } else if (animationName === "none") {
+    sheet.addFallback("old", "animation: none; mix-blend-mode: normal;");
+    sheet.addModern("old", "animation: none; opacity: 0; mix-blend-mode: normal;");
+    sheet.addAnimationRaw("new", "animation: none; mix-blend-mode: normal;");
+    sheet.addModern("group", "animation: none");
+  }
+  result._metadata.extraHead.push(markHTMLString(`<style>${sheet.toString()}</style>`));
+  return scope;
+}
+class ViewTransitionStyleSheet {
+  constructor(scope, name) {
+    this.scope = scope;
+    this.name = name;
+  }
+  modern = [];
+  fallback = [];
+  toString() {
+    const { scope, name } = this;
+    const [modern, fallback] = [this.modern, this.fallback].map((rules) => rules.join(""));
+    return [
+      `[data-astro-transition-scope="${scope}"] { view-transition-name: ${name}; }`,
+      this.layer(modern),
+      fallback
+    ].join("");
+  }
+  layer(cssText) {
+    return cssText ? `@layer astro { ${cssText} }` : "";
+  }
+  addRule(target, cssText) {
+    this[target].push(cssText);
+  }
+  addAnimationRaw(image, animation) {
+    this.addModern(image, animation);
+    this.addFallback(image, animation);
+  }
+  addModern(image, animation) {
+    const { name } = this;
+    this.addRule("modern", `::view-transition-${image}(${name}) { ${animation} }`);
+  }
+  addFallback(image, animation) {
+    const { scope } = this;
+    this.addRule(
+      "fallback",
+      // Two selectors here, the second in case there is an animation on the root.
+      `[data-astro-transition-fallback="${image}"] [data-astro-transition-scope="${scope}"],
+			[data-astro-transition-fallback="${image}"][data-astro-transition-scope="${scope}"] { ${animation} }`
+    );
+  }
+  addAnimationPair(direction, image, rules) {
+    const { scope, name } = this;
+    const animation = stringifyAnimation(rules);
+    const prefix = direction === "backwards" ? `[data-astro-transition=back]` : direction === "forwards" ? "" : `[data-astro-transition=${direction}]`;
+    this.addRule("modern", `${prefix}::view-transition-${image}(${name}) { ${animation} }`);
+    this.addRule(
+      "fallback",
+      `${prefix}[data-astro-transition-fallback="${image}"] [data-astro-transition-scope="${scope}"],
+			${prefix}[data-astro-transition-fallback="${image}"][data-astro-transition-scope="${scope}"] { ${animation} }`
+    );
+  }
+}
+function addAnimationProperty(builder, prop, value) {
+  let arr = builder[prop];
+  if (Array.isArray(arr)) {
+    arr.push(value.toString());
+  } else {
+    builder[prop] = [value.toString()];
+  }
+}
+function animationBuilder() {
+  return {
+    toString() {
+      let out = "";
+      for (let k in this) {
+        let value = this[k];
+        if (Array.isArray(value)) {
+          out += `
+	${k}: ${value.join(", ")};`;
+        }
+      }
+      return out;
+    }
+  };
+}
+function stringifyAnimation(anim) {
+  if (Array.isArray(anim)) {
+    return stringifyAnimations(anim);
+  } else {
+    return stringifyAnimations([anim]);
+  }
+}
+function stringifyAnimations(anims) {
+  const builder = animationBuilder();
+  for (const anim of anims) {
+    if (anim.duration) {
+      addAnimationProperty(builder, "animation-duration", toTimeValue(anim.duration));
+    }
+    if (anim.easing) {
+      addAnimationProperty(builder, "animation-timing-function", anim.easing);
+    }
+    if (anim.direction) {
+      addAnimationProperty(builder, "animation-direction", anim.direction);
+    }
+    if (anim.delay) {
+      addAnimationProperty(builder, "animation-delay", anim.delay);
+    }
+    if (anim.fillMode) {
+      addAnimationProperty(builder, "animation-fill-mode", anim.fillMode);
+    }
+    addAnimationProperty(builder, "animation-name", anim.name);
+  }
+  return builder.toString();
+}
+function toTimeValue(num) {
+  return typeof num === "number" ? num + "ms" : num;
+}
 
 function spreadAttributes(values = {}, _name, { class: scopedClassName } = {}) {
   let output = "";
@@ -2396,4 +2738,4 @@ function createVNode(type, props) {
   return vnode;
 }
 
-export { AstroJSX as A, clientAddressSymbol as B, ASTRO_VERSION as C, DEFAULT_404_COMPONENT as D, responseSentSymbol as E, Fragment as F, renderPage as G, REWRITE_DIRECTIVE_HEADER_KEY as H, REWRITE_DIRECTIVE_HEADER_VALUE as I, renderEndpoint as J, REROUTABLE_STATUS_CODES as K, commonjsGlobal as L, ROUTE_TYPE_HEADER as R, renderComponent as a, addAttribute as b, createComponent as c, createAstro as d, decodeKey as e, renderJSX as f, createVNode as g, escape as h, renderSlot as i, renderHead as j, REROUTE_DIRECTIVE_HEADER as k, bold as l, maybeRenderHead as m, red as n, dim as o, blue as p, decryptString as q, renderTemplate as r, spreadAttributes as s, createSlotValueFromString as t, unescapeHTML as u, renderSlotToString as v, chunkToString as w, isRenderInstruction as x, yellow as y, clientLocalsSymbol as z };
+export { AstroJSX as A, clientLocalsSymbol as B, clientAddressSymbol as C, DEFAULT_404_COMPONENT as D, ASTRO_VERSION as E, Fragment as F, responseSentSymbol as G, renderPage as H, REWRITE_DIRECTIVE_HEADER_KEY as I, REWRITE_DIRECTIVE_HEADER_VALUE as J, renderEndpoint as K, REROUTABLE_STATUS_CODES as L, commonjsGlobal as M, ROUTE_TYPE_HEADER as R, renderSlot as a, createAstro as b, createComponent as c, addAttribute as d, renderComponent as e, renderTransition as f, decodeKey as g, renderJSX as h, createVNode as i, escape as j, renderHead as k, REROUTE_DIRECTIVE_HEADER as l, maybeRenderHead as m, bold as n, red as o, dim as p, blue as q, renderTemplate as r, spreadAttributes as s, decryptString as t, unescapeHTML as u, createSlotValueFromString as v, renderSlotToString as w, chunkToString as x, yellow as y, isRenderInstruction as z };
