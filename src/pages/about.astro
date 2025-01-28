@@ -4,21 +4,20 @@ import Vale from "../assets/vale.jpeg";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Section from "../components/Section.astro";
+import Book from "../components/Book.astro";
+import HowWorks from "../components/HowWorks.astro";
 ---
 
 <Layout title="About Me">
   <Hero id="about">
     <div
-      class="h-full flex flex-col justify-center items-center mx-auto gap-8 md:flex-row w-11/12 md:w-9/12"
+      class="h-full flex flex-col md:justify-center items-center mx-auto gap-8 md:flex-row w-11/12"
     >
-      <div class="flex flex-col justify-center items-center md:text-lg px-2">
-        <h1
-          class="text-5xl md:text-6xl text-start font-semibold py-8 w-full"
-          id="about-me"
-          transition:name="About Me"
-        >
-          About Me
-        </h1>
+      <div class="flex flex-col justify-center items-start md:text-lg px-2 w-full space-y-2">
+        <p class="text-primary/40 font-semibold text-xl" id="about-intro">
+          Empowering success with evidence
+        </p>
+        <h1 class="text-4xl font-extrabold md:text-7xl">About me</h1>
         <div class="flex flex-col gap-4" id="about-text">
           <p>
             As a certified mindfulness coach aligned and trained with the ICF
@@ -42,7 +41,8 @@ import Section from "../components/Section.astro";
   </Hero>
   <Section>
     <div
-      class="flex flex-col justify-center items-center gap-10 bg-secondary border-none rounded-xl px-8 py-10 w-full lg:w-8/12 mx-auto text-center my-20 shadow-md"
+      id="section-two-about"
+      class="flex flex-col justify-center items-center gap-10 bg-quaternary border-none rounded-xl px-8 py-10 w-full lg:w-8/12 mx-auto text-center my-20 shadow-md"
     >
       <h4 class="text-2xl md:text-4xl font-extrabold text-center">
         Discover Your Path to Unbound Potential
@@ -59,13 +59,12 @@ import Section from "../components/Section.astro";
         </p>
       </div>
     </div>
-
-    <div class="flex justify-center mx-auto w-full py-14">
-      <spam class="text-xl italic font-semibold font-kumbh leading-snug">
-        Let's break free from limitations and discover the boundless
-        possibilities that await you.
-      </spam>
-    </div>
+  </Section>
+  <Section>
+    <HowWorks />
+  </Section>
+  <Section>
+    <Book />
   </Section>
 </Layout>
 
@@ -76,19 +75,20 @@ import Section from "../components/Section.astro";
   gsap.registerPlugin(ScrollTrigger);
 
   gsap.fromTo(
-    ["#about-me", "#about-text"],
+    ["#about-intro","h1", "#about-text", "img"],
     {
       opacity: 0,
-      y: 25,
+      scale: 0.95,
     },
     {
+      scale: 1,
       opacity: 1,
-      y: 0,
-      duration: 1.5,
-      stagger: 1,
-      ease: "power3.out",
+      duration: 1,
+      delay: 0.5,
+      ease: "power2.out",
+      stagger: 0.5,
       scrollTrigger: {
-        trigger: "#about-me",
+        trigger: "#about-intro",
         start: "top 80%",
         end: "bottom 20%",
       },
@@ -96,20 +96,22 @@ import Section from "../components/Section.astro";
   );
 
   gsap.fromTo(
-    "#Vale",
+    ["#section-two-about"],
     {
       opacity: 0,
+      y:30
     },
     {
+      y:0,
       opacity: 1,
-      duration: 1.5,
-      ease: "power3.out",
+      duration: 1,
       delay: 0.5,
+      ease: "power2.out",
+      stagger: 0.5,
       scrollTrigger: {
-        trigger: "#about-me",
+        trigger: "#section-two-about",
         start: "top 80%",
         end: "bottom 20%",
-        toggleActions: "play none none none",
       },
     }
   );

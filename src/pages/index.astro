@@ -2,17 +2,27 @@
 import Layout from "../layouts/Layout.astro";
 import Subscribe from "../components/Subscribe.astro";
 import Book from "../components/Book.astro";
+import Logo from "../assets/logo.svg";
+import { Icon } from "astro-icon/components";
+import Section from "../components/Section.astro";
 ---
 
 <Layout title="Adesso Coaching">
-  <div class="flex justify-center items-center flex-col h-screen">
-    <h1 class="font-noto font-semibold text-7xl md:text-[10rem] leading-none">
-      Adesso
-    </h1>
-    <h2 class="font-noto md:text-[8rem] text-6xl leading-none">Coaching</h2>
+  <div
+    class="flex justify-center items-center flex-col h-screen mx-auto text-center"
+  >
+    <Icon name="logo" height={200} width={200} id="logo" />
+    <h1 class="font-extrabold text-7xl md:text-[10rem] leading-none">Adesso</h1>
+    <h2 class="md:text-[8rem] text-6xl leading-none font-bold text-center">
+      Coaching
+    </h2>
   </div>
-  <Book />
-  <Subscribe />
+  <Section>
+    <Book />
+  </Section>
+  <div class="w-full lg:mx-0 lg:px-0">
+    <Subscribe />
+  </div>
 </Layout>
 
 <script>
@@ -25,13 +35,15 @@ import Book from "../components/Book.astro";
     ["h1", "h2"],
     {
       opacity: 0,
+      scale: 0.95,
     },
     {
+      scale: 1,
       opacity: 1,
-      duration: 1.5,
-			delay: 0.5,
+      duration: 1,
+      delay: 0.5,
       ease: "power2.out",
-      stagger: 0.8,
+      stagger: 0.5,
       scrollTrigger: {
         trigger: "h1",
         start: "top 80%",

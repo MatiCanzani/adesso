@@ -1,0 +1,1 @@
+import{g as r}from"./hoisted.BoSUTZ2r.js";import{S as o}from"./Book.astro_astro_type_script_index_0_lang.DTxo-b5K.js";r.registerPlugin(o);r.fromTo(["h1","h2"],{opacity:0,scale:.95},{scale:1,opacity:1,duration:1,delay:.5,ease:"power2.out",stagger:.5,scrollTrigger:{trigger:"h1",start:"top 80%",end:"bottom 20%"}});

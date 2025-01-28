@@ -1,0 +1,26 @@
+---
+import FAQ from "../components/FAQ.astro";
+
+const faqs = [
+  {
+    question: "How secure is my insurance information?",
+    answer:
+      "We prioritize the security of your insurance information. We use advanced encryption and strict data protection measures to ensure your data is safe and confidential.",
+  },
+  {
+    question: "How can I customize my insurance coverage?",
+    answer:
+      "Our insurance plans are customizable. You can tailor your coverage to meet your specific needs and budget.",
+  },
+  {
+    question: "Is there a waiting period for insurance claims?",
+    answer:
+      "There may be a waiting period for certain insurance claims, depending on the policy terms and conditions. Please refer to your policy documents for details.",
+  },
+];
+---
+<FAQ 
+  title="Good to know." 
+  subtitle="Everything you need to know about the my services." 
+  faqs={faqs} 
+/>

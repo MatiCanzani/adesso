@@ -1,0 +1,9 @@
+import{r as d}from"./index.DhYZZe0J.js";var a={exports:{}},s={};/**
+ * @license React
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var m=d,f=Symbol.for("react.element"),h=Symbol.for("react.fragment"),_=Object.prototype.hasOwnProperty,g=m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,y={key:!0,ref:!0,__self:!0,__source:!0};function u(r,e,n){var t,o={},l=null,c=null;n!==void 0&&(l=""+n),e.key!==void 0&&(l=""+e.key),e.ref!==void 0&&(c=e.ref);for(t in e)_.call(e,t)&&!y.hasOwnProperty(t)&&(o[t]=e[t]);if(r&&r.defaultProps)for(t in e=r.defaultProps,e)o[t]===void 0&&(o[t]=e[t]);return{$$typeof:f,type:r,key:l,ref:c,props:o,_owner:g.current}}s.Fragment=h;s.jsx=u;s.jsxs=u;a.exports=s;var v=a.exports;const x=()=>{const r=d.useRef(null);return d.useEffect(()=>{const e=document.createElement("script");e.src="https://calendar.google.com/calendar/scheduling-button-script.js",e.async=!0;const n=document.createElement("link");n.href="https://calendar.google.com/calendar/scheduling-button-script.css",n.rel="stylesheet",document.head.appendChild(n),document.body.appendChild(e);let o=setInterval(()=>{const l=document.querySelector(".qxCTlb");l&&(["w-9/12","md:w-5/12","md:px-14 !important"].forEach(i=>{i.split(" ").forEach(p=>{l.classList.add(p)})}),clearInterval(o))},100);return e.onload=()=>{window.calendar&&window.calendar.schedulingButton&&window.calendar.schedulingButton.load({url:"https://calendar.google.com/calendar/appointments/schedules/AcZssZ1RgtpzhzWVS8f_AU3_nD-4ukDG6sEaT_my1Srr3Kt9ubj8b8dlBO41hdYmWEgJXCfgBYgRYgZa?gv=true",color:"#20AD96",label:"Book an appointment",target:r.current,style:{maxWidth:"100px"}})},()=>{document.head.removeChild(n),document.body.removeChild(e),clearInterval(o)}},[]),v.jsx("div",{ref:r})};export{x as default};

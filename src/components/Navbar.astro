@@ -9,21 +9,25 @@ const items = [
 ];
 ---
 
-<nav class="fixed flex justify-between w-full left-0 top-0 py-4 px-4 md:px-12 gap-4 bg-white max-w-screen-2xl z-50">
-  <NavButton className="md:text-lg" link="/">Adesso</NavButton>
+<nav
+  class="fixed flex justify-between w-full left-0 top-0 py-4 px-4 md:px-12 gap-4 bg-white max-w-screen-2xl z-50"
+>
+  <a class="md:text-lg" href="/">
+    <Icon name="logo-nav" height={50} width={50} id="logo-nav" />
+  </a>
   <button class="md:hidden menu-button">
-    <Icon name="hamburguer" class='relative z-50 text-tertiary w-6 h-6'/>
+    <Icon name="hamburguer" class="relative z-50 text-tertiary w-6 h-6" />
   </button>
   <ul class="hidden md:inline-flex justify-between gap-4">
     {
       items.map((item) => (
-        <li>
+        <li transition:name={item.text}>
           <NavButton link={item.link}>{item.text}</NavButton>
         </li>
       ))
     }
     <li>
-      <NavButton link="/book" className="font-oxygen">
+      <NavButton link="/book">
         <div class="flex justify-between items-center gap-2">
           Book a Call
           <Icon
@@ -39,7 +43,7 @@ const items = [
   </ul>
 </nav>
 <div
-  class="mobile-menu fixed top-0 right-0 w-full h-full z-40 bg-gray-900 transform translate-x-full md:hidden"
+  class="mobile-menu fixed top-0 right-0 w-full h-full z-40 bg-tertiary transform translate-x-full md:hidden"
 >
   <ul class="flex flex-col items-center justify-center gap-8 h-full">
     {
@@ -48,7 +52,6 @@ const items = [
           <NavButton
             link={item.link}
             className="text-white text-2xl font-light"
-            transition:name={item.text}
           >
             {item.text}
           </NavButton>
@@ -60,16 +63,15 @@ const items = [
         link="/book"
         className="text-white text-2xl font-light inline-flex gap-2"
       >
-      <div class="flex justify-between items-center gap-2">
-
-        Book a Call
-        <Icon
-          name="book-a-call"
-          height={32}
-          width={32}
-          class="text-tertiary"
-          id="book-a-call"
-        />
+        <div class="flex justify-between items-center gap-2">
+          Book a Call
+          <Icon
+            name="book-a-call"
+            height={32}
+            width={32}
+            class="text-tertiary"
+            id="book-a-call"
+          />
         </div>
       </NavButton>
     </li>

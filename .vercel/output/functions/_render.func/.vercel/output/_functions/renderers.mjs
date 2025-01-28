@@ -1,7 +1,7 @@
 import React, { createElement } from 'react';
 import ReactDOM from 'react-dom/server';
-import { h as AstroUserError, A as AstroError } from './chunks/astro/assets-service_YmhS_AHm.mjs';
-import { A as AstroJSX, h as renderJSX, i as createVNode } from './chunks/astro/server_DKnCVUSr.mjs';
+import { h as AstroUserError, A as AstroError } from './chunks/astro/assets-service_BUPFV5a8.mjs';
+import { A as AstroJSX, h as renderJSX, i as createVNode } from './chunks/astro/server_CqGFnifT.mjs';
 
 const opts = {
 						experimentalReactChildren: false

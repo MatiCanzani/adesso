@@ -2,51 +2,60 @@
 import Calendar from "../components/Calendar";
 import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <Layout title="Book an Appointment">
   <Hero>
     <div
       id="book"
-      class="flex flex-col justify-start items-center mx-auto mt-[30px] gap-8 w-11/12 md:w-9/12"
+      class="flex flex-col justify-between items-center mx-auto mt-[30px]w-11/12 md:w-9/12 h-full gap-4"
     >
       <h1
-        class="text-5xl md:text-6xl text-start font-semibold py-8 w-full"
+        class="text-5xl md:text-6xl text-start font-extrabold py-8 w-full"
         id="about-me"
         transition:name="About Me"
       >
-        Ready to start? Let’s talk!
+        Ready to start? <br />
+        Let’s talk!
       </h1>
-      <p class="text-xl text-gray-600 mb-6">
-        Schedule a meeting with us using the calendar below.
+      <h2 class="text-2xl md:text-4xl text-start font-extrabold py-8 w-full">
+        How it works
+      </h2>
+      <p class="text-xl text-gray-600">
+        Your coaching sessions will be tailored to your personal and
+        professional goals. Engage in one-on- one sessions to start a self
+        discovery journey. Your progress will be tracked with regular
+        assessments, enjoying the flexibility you require by choosing your own
+        schedule.
       </p>
-      <Calendar client:load />
+      <p class="text-xl text-gray-600">
+        Experience a holistic approach to growth, focusing on both achieving
+        goals and promoting overall well-being, empowering you to pursue new
+        challenges and opportunities.
+      </p>
+    </div>
+    <div
+      class="flex gap-5 flex-start text-start italic w-full max-w-xl text-lg py-8"
+    >
+      <p class="text-gray-600">
+        <span class="text-tertiary text-xl">"</span>
+        When you change your mindset to start seeing magic around you, then magic
+        start to happen. Things change when you change your point of view.
+        <br />
+        That’s why working on our Mindset is so important.
+        <span class="text-tertiary text-xl">"</span>
+      </p>
     </div>
   </Hero>
+  <div class="flex flex-col justify-between items-start w-full gap-2 p-10">
+    <h3 class="text-2xl font-extrabold">
+      Your journey to a better you starts now.
+    </h3>
+    <h4 class="text-lg font-bold">
+      Book your free 30 to 60 minutes call to find out more.
+    </h4>
+    <Calendar client:load />
+  </div>
 </Layout>
 
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.fromTo(
-    "#book",
-    {
-      opacity: 0,
-      y: 25,
-    },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 1.5,
-      stagger: 1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: "#about-me",
-        start: "top 80%",
-        end: "bottom 20%",
-      },
-    }
-  );
-</script>

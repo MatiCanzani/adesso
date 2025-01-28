@@ -1,11 +1,12 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Section from "../../components/Section.astro";
+import BlogHeader from "../../components/BlogHeader.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-
+import { format } from "date-fns";
 import { contentfulClient } from "../../lib/contentful";
 import type { BlogPost } from "../../lib/contentful";
-import { Image } from "astro:assets";
+import sanitizeHtml from "sanitize-html";
 
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<BlogPost>({
@@ -13,9 +14,14 @@ export async function getStaticPaths() {
   });
 
   const pages = entries.items.map((item) => {
-    const imageUrl = `https:${item.fields.image.fields.file.url}`;
-    const imageHeight = item.fields.image.fields.file.details.image?.height;
-    const imageWidth = item.fields.image.fields.file.details.image?.width;
+    const imageUrl = item.fields.image
+      ? `https:${item.fields.image.fields.file.url}`
+      : "";
+
+    const imageHeight =
+      item && item.fields.image.fields.file?.details.image?.height;
+    const imageWidth =
+      item && item.fields.image.fields.file?.details.image?.width;
 
     return {
       params: { slug: item.fields.slug },
@@ -24,29 +30,31 @@ export async function getStaticPaths() {
         image: imageUrl,
         width: imageWidth,
         height: imageHeight,
-        content: documentToHtmlString(item.fields.content),
-        date: new Date(item.fields.date).toLocaleDateString(),
+        description: item.fields.description,
+        content: sanitizeHtml(documentToHtmlString(item.fields.content)),
+        date: format(new Date(item.fields.date), "d MMMM, yyyy"),
       },
     };
   });
+
   return pages;
 }
 
-const { content, title, date, image, width, height } = Astro.props;
-console.log("title", title);
+const { title, image, date,  description, width, height, content} = Astro.props;
 ---
 
 <Layout title={title}>
   <Section>
-    <title>{title}</title>
-    <time>{date}</time>
-    <Image
-      src={image}
-      alt={title}
-      width={width}
-      height={height}
-      class="max-w-md"
+    <BlogHeader
+      title={title}
+      description={description}
+      date={date}
+      link={Astro.url.pathname}
+      imageSrc={image}
     />
-    <article set:html={content} />
   </Section>
+  <artcile>
+    <div class="max-w-5xl mx-auto p-4">
+      <div class="" set:html={content}></div>
+    </div>
 </Layout>

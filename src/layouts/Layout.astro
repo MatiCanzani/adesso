@@ -2,7 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { ViewTransitions } from "astro:transitions";
-
+import "@fontsource-variable/kumbh-sans";
 interface Props {
   title: string;
 }
@@ -17,14 +17,20 @@ const { title } = Astro.props;
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-    <script is:inline src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+    <link
+      href="https://calendar.google.com/calendar/scheduling-button-script.css"
+      rel="stylesheet"
+    />
+    <script
+      is:inline
+      src="https://calendar.google.com/calendar/scheduling-button-script.js"
+      async></script>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
   </head>
   <body
-    class="bg-white text-primary h-dvh grid grid-rows-[auto,1fr,auto]"
+    class="bg-white text-primary h-dvh grid grid-rows-[auto,1fr,auto] scroll-smooth"
   >
     <Header />
     <main class="w-full mx-auto">
@@ -32,14 +38,54 @@ const { title } = Astro.props;
     </main>
     <Footer />
   </body><style is:global>
+    h1,
     h2,
     h3,
     h4 {
-      font-family: "Kumbh Sans Variable", sans-serif;
+      @apply text-secondary;
     }
-    p,
-    a {
-      font-family: "Oxigen", sans-serif;
+    h2, h3, h4{
+      @apply w-full text-center xl:text-left 
     }
   </style>
+
+  <!-- <script is:inline>
+    const observeHeadings = (selector) => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(
+              "motion-blur-in-[10px]",
+              "motion-duration-[1.13s]",
+              "motion-duration-[0.49s]/scale",
+              "motion-duration-[0.7s]/blur",
+              "motion-delay-[0.41s]/blur",
+              "motion-ease-spring-snappy",
+              "motion-translate-y-in-[10%]"
+            );
+          }
+        });
+      });
+
+      const elements = document.querySelectorAll(selector);
+
+      if (elements.length === 0) {
+        console.warn(`No elements found for selector "${selector}"`);
+        return;
+      }
+
+      elements.forEach((element) => {
+        if (element instanceof Element) {
+          console.log("Observing element:", element);
+          observer.observe(element);
+        } else {
+          console.warn("Skipping invalid element:", element);
+        }
+      });
+    };
+
+    document.addEventListener("astro:page-load", () => {
+      observeHeadings("h1, h2");
+    });
+  </script> -->
 </html>

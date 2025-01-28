@@ -1,5 +1,5 @@
-import { A as AstroError, j as NoImageMetadata, F as FailedToFetchRemoteImageDimensions, k as ExpectedImageOptions, l as ExpectedImage, m as ExpectedNotESMImage, r as resolveSrc, n as isRemoteImage, i as isRemotePath, o as isESMImportedImage, p as isLocalService, D as DEFAULT_HASH_PROPS, q as InvalidImageService, s as ImageMissingAlt } from './astro/assets-service_YmhS_AHm.mjs';
-import { b as createAstro, c as createComponent, r as renderTemplate, m as maybeRenderHead, d as addAttribute, s as spreadAttributes } from './astro/server_DKnCVUSr.mjs';
+import { A as AstroError, j as NoImageMetadata, F as FailedToFetchRemoteImageDimensions, k as ExpectedImageOptions, l as ExpectedImage, m as ExpectedNotESMImage, r as resolveSrc, n as isRemoteImage, i as isRemotePath, o as isESMImportedImage, p as isLocalService, D as DEFAULT_HASH_PROPS, q as InvalidImageService, s as ImageMissingAlt } from './astro/assets-service_BUPFV5a8.mjs';
+import { d as createAstro, c as createComponent, r as renderTemplate, m as maybeRenderHead, e as addAttribute, s as spreadAttributes } from './astro/server_CqGFnifT.mjs';
 
 function isImageMetadata(src) {
   return src.fsPath && !("fsPath" in src);
@@ -839,7 +839,7 @@ async function getConfiguredImageService() {
   if (!globalThis?.astroAsset?.imageService) {
     const { default: service } = await import(
       // @ts-expect-error
-      './build-service_5iUtceCv.mjs'
+      './build-service_C4a5pkOj.mjs'
     ).catch((e) => {
       const error = new AstroError(InvalidImageService);
       error.cause = e;
@@ -945,7 +945,7 @@ const $$Image = createComponent(async ($$result, $$props, $$slots) => {
     additionalAttributes.srcset = image.srcSet.attribute;
   }
   return renderTemplate`${maybeRenderHead()}<img${addAttribute(image.src, "src")}${spreadAttributes(additionalAttributes)}${spreadAttributes(image.attributes)}>`;
-}, "/Users/maticanzani/Documents/Personal/vale/adesso/node_modules/.pnpm/astro@4.16.6_rollup@4.24.0_typescript@5.6.3/node_modules/astro/components/Image.astro", void 0);
+}, "/Users/maticanzani/Documents/Personal/repos/vale/adesso/node_modules/.pnpm/astro@4.16.15_rollup@4.24.0_typescript@5.6.3/node_modules/astro/components/Image.astro", void 0);
 
 const mimes = {
   "3g2": "video/3gpp2",
@@ -1448,7 +1448,7 @@ const $$Picture = createComponent(async ($$result, $$props, $$slots) => {
     const srcsetAttribute = props.densities || !props.densities && !props.widths ? `${image.src}${image.srcSet.values.length > 0 ? ", " + image.srcSet.attribute : ""}` : image.srcSet.attribute;
     return renderTemplate`<source${addAttribute(srcsetAttribute, "srcset")}${addAttribute(lookup(image.options.format ?? image.src) ?? `image/${image.options.format}`, "type")}${spreadAttributes(sourceAdditionalAttributes)}>`;
   })} <img${addAttribute(fallbackImage.src, "src")}${spreadAttributes(imgAdditionalAttributes)}${spreadAttributes(fallbackImage.attributes)}> </picture>`;
-}, "/Users/maticanzani/Documents/Personal/vale/adesso/node_modules/.pnpm/astro@4.16.6_rollup@4.24.0_typescript@5.6.3/node_modules/astro/components/Picture.astro", void 0);
+}, "/Users/maticanzani/Documents/Personal/repos/vale/adesso/node_modules/.pnpm/astro@4.16.15_rollup@4.24.0_typescript@5.6.3/node_modules/astro/components/Picture.astro", void 0);
 
 const imageConfig = {"service":{"entrypoint":"@astrojs/vercel/build-image-service","config":{"sizes":[640,750,828,1080,1200,1920,2048,3840],"domains":["astro.build","images.ctfassets.net"],"remotePatterns":[{"protocol":"https","hostname":"**.contentful.com"}]}},"domains":["astro.build","images.ctfassets.net"],"remotePatterns":[{"protocol":"https","hostname":"**.contentful.com"}]};
 					const getImage = async (options) => await getImage$1(options, imageConfig);

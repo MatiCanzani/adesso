@@ -15,13 +15,31 @@ const GoogleCalendarSchedulingButton = () => {
     document.head.appendChild(link);
     document.body.appendChild(script);
 
+    const checkAndModifyElement = () => {
+      const element = document.querySelector('.qxCTlb');
+      if (element) {
+        const classesToAdd = ['w-9/12', 'md:w-5/12', 'md:px-14 !important'];
+        classesToAdd.forEach(className => {
+          className.split(' ').forEach(part => {
+            element.classList.add(part);
+          });
+        });
+        clearInterval(intervalId);
+      }
+    };
+
+    let intervalId = setInterval(checkAndModifyElement, 100);
+
     script.onload = () => {
       if (window.calendar && window.calendar.schedulingButton) {
         window.calendar.schedulingButton.load({
           url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1RgtpzhzWVS8f_AU3_nD-4ukDG6sEaT_my1Srr3Kt9ubj8b8dlBO41hdYmWEgJXCfgBYgRYgZa?gv=true',
-          color: '#039BE5',
+          color: '#20AD96',
           label: 'Book an appointment',
           target: buttonRef.current,
+          style: {
+            maxWidth: '100px'
+          }
         });
       }
     };
@@ -29,10 +47,11 @@ const GoogleCalendarSchedulingButton = () => {
     return () => {
       document.head.removeChild(link);
       document.body.removeChild(script);
+      clearInterval(intervalId);
     };
   }, []);
 
-  return <div ref={buttonRef} />;
+  return <div ref={buttonRef}/>;
 };
 
 export default GoogleCalendarSchedulingButton;

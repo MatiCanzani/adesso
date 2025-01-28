@@ -6,20 +6,20 @@ import { contentfulClient } from "../lib/contentful";
 import type { BlogPost } from "../lib/contentful";
 import BlogsGrid from "../components/BlogsGrid.astro";
 
-const entries = await contentfulClient.getEntries<BlogPost>({
+const entries = await contentfulClient.getEntries <BlogPost>({
   content_type: "blogPost",
 });
 
 const posts = entries.items.map((item) => {
-  const { title, date, description, slug, image } = item.fields;
-  const imageUrl = `https:${item.fields.image.fields.file.url}`;
-  console.log('imageUrl', imageUrl)
+  const { title, date, description, slug, image, content } = item.fields;
+  const imageUrl = image &&  `https:${image.fields.file.url}`;
   return {
     title,
     slug,
     description,
     date: new Date(date).toLocaleDateString(),
     imageUrl,
+    content
   };
 });
 ---
@@ -27,9 +27,8 @@ const posts = entries.items.map((item) => {
 <Layout title="My Articles">
   <Section class="h-screen mt-16">
     <h1
-      class="text-5xl md:text-6xl text-start font-semibold py-8 w-full"
-      id="about-me"
-      transition:name="About Me"
+      class="text-5xl md:text-6xl text-start font-extrabold py-8 w-full"
+      id="blog"
     >
       My Articles
     </h1>
@@ -40,6 +39,7 @@ const posts = entries.items.map((item) => {
             title={post.title}
             date={post.date}
             description={post.description}
+            content={JSON.stringify(post.content)}
             link={`/posts/${post.slug}`}
             imageSrc={post.imageUrl}
           />

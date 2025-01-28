@@ -3,11 +3,14 @@ import { Icon } from "astro-icon/components";
 ---
 
 <div
-  class="w-11/12 md:w-9/12 bg-quaternary flex flex-col justify-center items-center mx-auto p-8 rounded-3xl gap-10 my-10"
+  class="relative w-11/12 md:w-9/12 bg-quaternary flex flex-col justify-center items-center mx-auto p-8 rounded-3xl gap-10 drop-shadow-xl"
+  id="get-online-session"
 >
-  <div class="max-w-xl">
-    <h4 class="text-4xl py-4 font-semibold">Get online session.</h4>
-    <div class="space-y-2">
+  <div class="max-w-[50rem]">
+    <h4 class="text-4xl py-4 font-semibold text-center" id="get-online-session-title">
+      Get online session.
+    </h4>
+    <div class="space-y-2 text-center">
       <p>
         Together, we'll embark on a journey of self-discovery, exploring your
         unique strengths, values, and aspirations.
@@ -19,16 +22,16 @@ import { Icon } from "astro-icon/components";
       </p>
     </div>
   </div>
-  <div class="flex flex-row h-auto  justify-center gap-8">
+  <div class="flex flex-row h-auto justify-center gap-8">
     <Icon
-      name='arrow-right'
+      name="arrow-right"
       height={60}
       width={60}
       class="text-tertiary"
-      id='arrow-right'
+      id="arrow-right"
     />
     <button
-      class="bg-tertiary text-white rounded-lg font-semibold px-8 py-3 text-sm w-auto"
+      class="bg-tertiary text-white rounded-lg font-bold px-8 py-2 text-md w-auto"
     >
       Book now
     </button>
@@ -42,23 +45,51 @@ import { Icon } from "astro-icon/components";
   gsap.registerPlugin(ScrollTrigger);
 
   gsap.fromTo(
-    '#arrow-right',
+    "#arrow-right",
     {
+      x: -20,
       opacity: 0,
-      x: -10,
     },
     {
       x: 0,
       opacity: 1,
-      duration: 1.5,
+      duration: 0.5,
+      repeat: -1,
+      repeatDelay: 0.8,
+      ease: "sine.inOut"
+    }
+  );
+
+  gsap.fromTo(
+    ["#get-online-session"],
+    {
+      opacity: 0,
+      y: 30,
+    },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1,
       delay: 0.5,
       ease: "power2.out",
-      stagger: 0.8,
+      stagger: 0.5,
       scrollTrigger: {
-        trigger: "#arrow-right",
+        trigger: "#get-online-session",
         start: "top 80%",
         end: "bottom 20%",
       },
     }
   );
+
+  // gsap.to("#arrow-right", {
+  //   duration: 2,
+  //   repeat: -1,
+  //   repeatDelay: 2,
+  //   ease: "bounce.inOut",
+  //   scrollTrigger: {
+  //     trigger: "#get-online-session",
+  //     start: "top 80%",
+  //     end: "bottom 20%",
+  //   },
+  // });
 </script>

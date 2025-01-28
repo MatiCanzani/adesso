@@ -1,6 +1,10 @@
-import { j as escape, D as DEFAULT_404_COMPONENT } from './astro/server_DKnCVUSr.mjs';
+import { N as NOOP_MIDDLEWARE_HEADER, j as escape, D as DEFAULT_404_COMPONENT } from './astro/server_CqGFnifT.mjs';
 
-const NOOP_MIDDLEWARE_FN = (_, next) => next();
+const NOOP_MIDDLEWARE_FN = async (_ctx, next) => {
+  const response = await next();
+  response.headers.set(NOOP_MIDDLEWARE_HEADER, "true");
+  return response;
+};
 
 /**
  * Base64 Encodes an arraybuffer
