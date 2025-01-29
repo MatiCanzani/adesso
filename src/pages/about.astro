@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import Vale from "../assets/vale.jpeg";
+import Vale from "../assets/vale-2.png";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Section from "../components/Section.astro";
@@ -13,7 +13,7 @@ import HowWorks from "../components/HowWorks.astro";
     <div
       class="h-full flex flex-col md:justify-center items-center mx-auto gap-8 md:flex-row w-11/12"
     >
-      <div class="flex flex-col justify-center items-start md:text-lg px-2 w-full space-y-2">
+      <div class="flex flex-col justify-center items-start md:text-lg px-2 w-full space-y-2 lg:w-1/2">
         <p class="text-primary/40 font-semibold text-xl" id="about-intro">
           Empowering success with evidence
         </p>
@@ -34,7 +34,7 @@ import HowWorks from "../components/HowWorks.astro";
       <Image
         src={Vale}
         alt="Vale Borzori"
-        class="max-w-md rounded-xl shadow-md w-full grayscale-[90%]"
+        class="max-w-2xl rounded-xl drop-shadow-xl w-full lg:w-1/2"
         id="Vale"
       />
     </div>

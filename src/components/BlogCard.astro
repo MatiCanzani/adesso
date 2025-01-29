@@ -13,12 +13,11 @@ interface Props {
 }
 
 const { title, date, description, link, imageSrc } = Astro.props;
-
 ---
 
 <a href={link}>
   <div
-    class="relative h-[450px] min-w-80 max-w-[600px] flex-shrink-0 overflow-hidden rounded-xl before:absolute before:inset-x-0 before:z-10 before:size-full before:bg-gradient-to-t before:from-neutral-900/[.7] drop-shadow-2xl"
+    class="relative h-[450px] min-w-80 max-w-[600px] flex-shrink-0 overflow-hidden rounded-xl before:absolute before:inset-x-0 before:z-10 before:size-full before:bg-gradient-to-t before:from-neutral-900/[.5] drop-shadow-2xl"
   >
     <div class="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm">
       {
@@ -34,29 +33,33 @@ const { title, date, description, link, imageSrc } = Astro.props;
         )
       }
     </div>
-    <div class="absolute inset-x-0 top-0 flex justify-end p-4 z-10 text-secondary w-full">
-      <p class="font-normal mb-3">
-        {date}
-      </p>
-    </div>
-    <div class="absolute inset-x-0 bottom-0 z-10 text-secondary ">
-      <div class="flex h-full flex-col p-4 sm:px-6 relative">
-        <h5
-          class=" font-bold text-2xl tracking-tight mb-2"
-          transition:name={title}
-        >
-          {title}
-        </h5>
-        <p class="font-normal p-3">
-          {description}
+    <div class="backdrop-blur-sm absolute inset-0 z-10">
+      <div
+        class="absolute inset-x-0 top-0 flex justify-end p-4 z-10 text-quaternary w-full"
+      >
+        <p class="font-normal mb-3">
+          {date}
         </p>
-        <div class="text-end">
-          <a
-            class="text-white bg-tertiary hover:bg-tertiary-[110%] focus:ring-4 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center"
-            href={link}
+      </div>
+      <div class="absolute left-0 bottom-0 z-10 text-quaternary">
+        <div class="flex h-full flex-col p-4 sm:px-6 relative">
+          <h5
+            class="font-bold text-2xl tracking-tight mb-2"
+            transition:name={title}
           >
-            Read more
-          </a>
+            {title}
+          </h5>
+          <p class="font-normal p-3">
+            {description}
+          </p>
+          <div class="text-end">
+            <a
+              class="text-white bg-tertiary hover:bg-tertiary-[110%] focus:ring-4 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center"
+              href={link}
+            >
+              Read more
+            </a>
+          </div>
         </div>
       </div>
     </div>
